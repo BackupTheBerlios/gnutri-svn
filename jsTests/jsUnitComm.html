@@ -1,0 +1,37 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Auslavis communication test</title>
+<script language="JavaScript" type="text/javascript" src="../jsunit/app/jsUnitCore.js"></script>
+<script language="JavaScript" type="text/javascript" src="../js/comm.js"></script>
+<script language="JavaScript" type="text/javascript">
+
+function testSendRetrData() {
+    data = {test: "abc"};
+    res = retrdata(senddata(data));
+    assertEquals("Simple test", data.test, res.test);
+
+    data = {test: [{id: '1'}, {id: '2'}, {id: '3'}, {id: '4'}], abc: "123"}
+    res = retrdata(senddata(data));
+    assertEquals("Second test: abc", data.abc, res.abc);
+    assertEquals("Second test: test length", data.test.length, res.test.length);
+    assertEquals("Second test: test value 0", data.test[0].id, res.test[0].id);
+    assertEquals("Second test: test value 1", data.test[1].id, res.test[1].id);
+    assertEquals("Second test: test value 2", data.test[2].id, res.test[2].id);
+    assertEquals("Second test: test value 3", data.test[3].id, res.test[3].id);
+}
+
+</script>
+    </head>
+
+    <body>
+        <h1>communication tests</h1>
+
+        <p>This page tests Auslavis server-client communication</p>
+    </body>
+</html>
+
+
+

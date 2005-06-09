@@ -1,0 +1,462 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+
+<window id="window" title="Auslavis"
+    xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+    xmlns:html="http://www.w3.org/1999/xhtml"
+    onload="al_onload();">
+
+    <script src="js/utils.js"/>
+    <script src="js/comm.js"/>
+    <script src="js/data_complex.js"/>
+    <script src="js/data_tree.js"/>
+    <script src="js/ctrl_ComplexView.js"/>
+    <script src="js/ctrl_TreeView.js"/>
+    <script src="js/al_user.js"/>
+    <script src="js/al_prod_tree.js"/>
+    <script src="js/al_prod_edit.js"/>
+    <script src="js/al_prod_unit.js"/>
+    <script src="js/al_prod_complex.js"/>
+    <script src="js/al_menu.js"/>
+    <script src="js/al_report.js"/>
+    <script src="js/al_admin.js"/>
+    <script src="js/auslavis.js"/>
+
+<hbox>
+    <label id="user_info" value=""/>
+    <spacer flex="1"/>
+    <label id="logout" collapsed="true" value="Atsijungti"/>
+</hbox>
+
+<tabbox flex="1">
+    <tabs>
+        <tab label="Vartotojas"/>
+        <tab label="Produktai"/>
+        <tab label="Menu" id="menu" collapsed="true"/>
+        <tab label="Raportai" id="report" collapsed="true"/>
+        <tab label="Administravimas" id="user_management" collapsed="true"/>
+    </tabs>
+    <tabpanels flex="1">
+        <!--
+
+        User login/change
+
+        -->
+        <tabpanel id="user" orient="vertical">
+            <!--
+                Login/Regiser User
+            -->
+            <vbox id="user_login">
+                <grid flex="1">
+                    <columns>
+                        <column/>
+                        <column/>
+                    </columns>
+                    <rows>
+                        <row>
+                            <label value="Vardas"/>
+                            <textbox id="user_login_name"  maxlength="64"/>
+                        </row>
+                        <row>
+                            <label value="Slaptažodis"/>
+                            <textbox id="user_login_password" type="password" maxlength="16"/>
+                        </row>
+                        <row>
+                            <spacer/>
+                            <button label="Prisijungti" id="user_login_login"/>
+                        </row>
+                    </rows>
+                </grid>
+                <splitter/>
+                <grid flex="1">
+                    <columns>
+                        <column/>
+                        <column/>
+                    </columns>
+                    <rows>
+                        <row>
+                            <label value="Vardas"/>
+                            <textbox id="user_register_name"  maxlength="64"/>
+                        </row>
+                        <row>
+                            <label value="Slaptažodis"/>
+                            <textbox id="user_register_password" type="password" maxlength="16"/>
+                        </row>
+                        <row>
+                            <label value="Svoris"/>
+                            <textbox id="user_register_weight"/>
+                        </row>
+                        <row>
+                            <label value="Ūgis"/>
+                            <textbox id="user_register_height"/>
+                        </row>
+                        <row>
+                            <label value="Fizinis darbas"/>
+                            <menulist id="user_register_work">
+                                <menupopup>
+                                    <menuitem label="Jokio"/>
+                                    <menuitem label="Lengvas"/>
+                                    <menuitem label="Vidutinis"/>
+                                    <menuitem label="Sunkus"/>
+                                </menupopup>
+                            </menulist>
+                        </row>
+                        <row>
+                            <spacer/>
+                            <button label="Registruoti" id="user_register"/>
+                        </row>
+                    </rows>
+                </grid>
+           </vbox>
+
+           <!--
+                Change user information
+           -->
+
+            <vbox id="user_change" collapsed="true">
+                <grid flex="1">
+                    <columns>
+                        <column/>
+                        <column/>
+                    </columns>
+                    <rows>
+                        <row>
+                            <label value="Vardas"/>
+                            <textbox id="user_change_name" maxlength="64" flex="1"/>
+                        </row>
+                        <row>
+                            <label value="Slaptažodis"/>
+                            <textbox id="user_change_password" type="password" maxlength="16"/>
+                        </row>
+                        <row>
+                            <label value="Svoris"/>
+                            <textbox id="user_change_weight"/>
+                        </row>
+                        <row>
+                            <label value="Ūgis"/>
+                            <textbox id="user_change_height"/>
+                        </row>
+                        <row>
+                            <label value="Fizinis darbas"/>
+                            <menulist id="user_change_work">
+                                <menupopup>
+                                    <menuitem label="Jokio"/>
+                                    <menuitem label="Lengvas"/>
+                                    <menuitem label="Vidutinis"/>
+                                    <menuitem label="Sunkus"/>
+                                </menupopup>
+                            </menulist>
+                        </row>
+                        <row>
+                            <spacer/>
+                            <button label="Pakeisti" id="user_change_change"/>
+                        </row>
+                    </rows>
+                </grid>
+            </vbox>
+        </tabpanel>
+        <!--
+
+        Products managment
+
+        -->
+        <tabpanel id="prod" orient="horizontal">
+            <vbox flex="1">
+                <tree flex="1" id="prod_tree" alternatingbackground="true">
+                    <treecols>
+                        <treecol id="prod_tree_name" label="Vardas" 
+                            primary="true" flex="5"/>
+                        <splitter/>
+                        <treecol id="prod_tree_rieb" label="R" flex="1"/>
+                        <treecol id="prod_tree_angl" label="A" flex="1"/>
+                        <treecol id="prod_tree_balt" label="B" flex="1"/>
+                    </treecols>
+
+                    <treechildren id="prod_tree_1"/>
+                </tree>
+                <vbox>
+                    <button flex="1" label="Nauja Kategorija"
+                        collapsed="true"
+                        id="prod_tree_addCategory"/>
+                    <button flex="1" label="Naujas Produktas"
+                        collapsed="true"
+                        id="prod_tree_addProduct"/>
+                    <button flex="1" label="Trinti"
+                        collapsed="true"
+                        id="prod_tree_delete"/>
+                </vbox>
+            </vbox>
+            <splitter/>
+
+            <tabbox flex="1">
+                <tabs id="prod_tabs">
+                    <tab label="Kategorija" id="prod_cat" collapsed="false"/>
+                    <tab label="Pagrindinis" id="prod_edit" collapsed="true"/>
+                    <tab label="Vienetai" id="prod_unit" collapsed="true"/>
+                    <tab label="Sudėtinis" id="prod_complex" collapsed="true"/>
+                </tabs>
+                <tabpanels flex="1">
+                    <!--
+                        Category Edit
+                    -->
+                    <tabpanel orient="vertical">
+                        <hbox>
+                            <checkbox id="cat_rights_servant" checked="false" label="Leisti modifikuoti tarnams"/>
+                            <checkbox id="cat_rights_others" checked="false" label="Leisti modifikuoti kitiems"/>
+                        </hbox>
+                        <hbox>
+                            <label value="Vardas"/>
+                            <textbox id="prod_cat_name" flex="1"/>
+                            <button label="Tinka" id="cat_edit_edit"/>
+                            <button label="Perimti teises" id="cat_edit_take"/>
+                        </hbox>
+                    </tabpanel>
+                    <!--
+                        Product Edit Main
+                    -->
+                    <tabpanel orient="vertical">
+                        <html:div>
+                            <html:a href="" id="prod_edit_information">information</html:a>
+                        </html:div>
+                        <hbox>
+                            <checkbox id="prod_edit_complex" checked="false" label="Sudėtinis"/>
+                            <checkbox id="prod_edit_secret" checked="false" label="Slaptas"/>
+                        </hbox>
+                        <hbox>
+                            <checkbox id="prod_rights_servant" checked="false" label="Leisti modifikuoti tarnams"/>
+                            <checkbox id="prod_rights_others" checked="false" label="Leisti modifikuoti kitiems"/>
+                        </hbox>
+                        <grid>
+                            <columns>
+                                <column/>
+                                <column flex="1"/>
+                            </columns>
+                            <rows>
+                                <row>
+                                    <label value="Pavadinimas"/>
+                                    <textbox id="prod_edit_name" flex="1"/>
+                                </row>
+                                <row>
+                                    <label value="Riebalai"/>
+                                    <textbox id="prod_edit_rieb" flex="1"/>
+                                </row>
+                                <row>
+                                    <label value="Angliavandeniai"/>
+                                    <textbox id="prod_edit_angl" flex="1"/>
+                                </row>
+                                <row>
+                                    <label value="Baltymai"/>
+                                    <textbox id="prod_edit_balt" flex="1"/>
+                                </row>
+                                <row id="prod_edit_r_linkdescr">
+                                    <label value="Nuorodos aprašas"/>
+                                    <textbox id="prod_edit_linkdescr" flex="1"/>
+                                </row>
+                                <row id="prod_edit_r_link">
+                                    <label value="Nuoroda"/>
+                                    <textbox id="prod_edit_link" flex="1"/>
+                                </row>
+                            </rows>
+                        </grid>
+                        <label value="Aprašas"/>
+                        <textbox id="prod_edit_descr" multiline="true" flex="1"/>
+                        <hbox>
+                            <spacer flex="1"/>
+                            <button label="Tinka" id="prod_edit_edit"/>
+                            <button label="Perimti teises" id="prod_edit_take"/>
+                        </hbox>
+                    </tabpanel>
+                    <!--
+                        Product Edit Unit
+                    -->
+                    <tabpanel orient="vertical">
+                        <tree id="prod_unit_tree" hidecolumnpicker="true"
+                            flex="2" alternatingbackground="true">
+                            <treecols>
+                                <treecol id="prod_unit_tree_unit"
+                                    label="Vienetai" flex="1" primary="true"/>
+                                <treecol id="prod_unit_tree_weight"
+                                    label="Svoris" flex="1"/>
+                            </treecols>
+                            <treechildren id="prod_unit_tree_children"/>
+                        </tree>
+                        <hbox>
+                            <label value="Vienetai"/>
+                            <textbox id="prod_unit_unit"/>
+                            <label value="Svoris"/>
+                            <textbox id="prod_unit_weight"/>
+                            <button label="Įtraukti/Keisti" id="prod_unit_add"/>
+                            <spacer flex="1"/>
+                            <button label="Ištrinti" id="prod_unit_delete"/>
+                        </hbox>
+                    </tabpanel>
+                    <!--
+                        Product Edit Complex
+                    -->
+                    <tabpanel orient="vertical">
+                        <tree id="prod_complex_tree" hidecolumnpicker="true"
+                            flex="1" alternatingbackground="true">
+                            <treecols>
+                                <treecol id="prod_complex_tree_prod"
+                                    label="Produktas" flex="1" primary="true"/>
+                                <treecol id="prod_complex_tree_unit"
+                                    label="Vienetai" flex="1"/>
+                                <treecol id="prod_complex_tree_amount"
+                                    label="Kiekis" flex="1"/>
+                            </treecols>
+                            <treechildren/>
+                        </tree>
+                        <vbox flex="1">
+                            <listbox id="prod_unit_list" flex="1"/>
+                            <hbox>
+                                <textbox id="prod_complex_amount" flex="1"/>
+                                <label id="prod_complex_total" value=""/>
+                                <button label="Tinka" id="prod_complex_edit"/>
+                                <button label="Ištrinti" id="prod_complex_delete"/>
+                            </hbox>
+                        </vbox>
+                    </tabpanel>
+                </tabpanels>
+            </tabbox>
+        </tabpanel>
+        <!--
+
+            User menu managment
+
+        -->
+        <tabpanel>
+            <tree flex="1" id="menu_tree" alternatingbackground="true">
+                <treecols>
+                    <treecol id="prod_tree_name" label="Vardas" 
+                        primary="true" flex="5"/>
+                    <splitter/>
+                    <treecol id="prod_tree_rieb" label="R" flex="1"/>
+                    <treecol id="prod_tree_angl" label="A" flex="1"/>
+                    <treecol id="prod_tree_balt" label="B" flex="1"/>
+                </treecols>
+
+                <treechildren/>
+            </tree>
+            <splitter/>
+            <vbox flex="2">
+                <hbox>
+                    <menulist id="menu_date_year" label="Year">
+                        <menupopup>
+                        </menupopup>
+                    </menulist>
+                    <menulist id="menu_date_month" label="Mėnuo">
+                        <menupopup>
+                            <menuitem label="Sausis"/>
+                            <menuitem label="Vasaris"/>
+                            <menuitem label="Kovas"/>
+                            <menuitem label="Balandis"/>
+                            <menuitem label="Gegužė"/>
+                            <menuitem label="Birželis"/>
+                            <menuitem label="Liepa"/>
+                            <menuitem label="Rugpjūtis"/>
+                            <menuitem label="Rugsėjis"/>
+                            <menuitem label="Spalis"/>
+                            <menuitem label="Lapkritis"/>
+                            <menuitem label="Gruodis"/>
+                        </menupopup>
+                    </menulist>
+                    <menulist id="menu_date_day" label="Diena">
+                        <menupopup>
+                        </menupopup>
+                    </menulist>
+                    <menulist id="menu_date_time" label="Valgymas">
+                        <menupopup>
+                            <menuitem label="Pusryčiai"/>
+                            <menuitem label="Priešpiečiai"/>
+                            <menuitem label="Pietūs"/>
+                            <menuitem label="Pavakariai"/>
+                            <menuitem label="Vakarienė"/>
+                            <menuitem label="Naktipiečiai"/>
+                        </menupopup>
+                    </menulist>
+                </hbox>
+                <tree id="menu_user_tree" hidecolumnpicker="true" flex="1"
+                    alternatingbackground="true">
+                    <treecols>
+                        <treecol id="prod_complex_tree_prod"
+                            label="Produktas" flex="1" primary="true"/>
+                        <treecol id="prod_complex_tree_unit"
+                            label="Vienetai" flex="1"/>
+                        <treecol id="prod_complex_tree_amount"
+                            label="Kiekis" flex="1"/>
+                    </treecols>
+                    <treechildren/>
+                </tree>
+                <vbox flex="1">
+                    <listbox id="menu_user_list" flex="1"/>
+                    <hbox>
+                        <textbox id="menu_user_amount" flex="1"/>
+                        <button label="Tinka" id="menu_user_edit"/>
+                        <button label="Ištrinti" id="menu_user_delete"/>
+                    </hbox>
+                </vbox>
+            </vbox>
+        </tabpanel>
+        <!--
+
+            Raportų generavimas
+
+        -->
+        <tabpanel orient="vertical">
+            <hbox>
+                <menulist id="report_date_year" label="Year">
+                    <menupopup>
+                    </menupopup>
+                </menulist>
+                <menulist id="report_date_month" label="Mėnuo">
+                    <menupopup>
+                        <menuitem label="Sausis"/>
+                        <menuitem label="Vasaris"/>
+                        <menuitem label="Kovas"/>
+                        <menuitem label="Balandis"/>
+                        <menuitem label="Gegužė"/>
+                        <menuitem label="Birželis"/>
+                        <menuitem label="Liepa"/>
+                        <menuitem label="Rugpjūtis"/>
+                        <menuitem label="Rugsėjis"/>
+                        <menuitem label="Spalis"/>
+                        <menuitem label="Lapkritis"/>
+                        <menuitem label="Gruodis"/>
+                    </menupopup>
+                </menulist>
+                <menulist id="report_date_day" label="Diena">
+                    <menupopup>
+                    </menupopup>
+                </menulist>
+                <label value="Dienų skaičius"/>
+                <textbox id="report_days"/>
+                <button label="Generuoti raportą" id="report_generate"/>
+            </hbox>
+        </tabpanel>
+        <!--
+
+            Users' managment
+
+        -->
+        <tabpanel orient="vertical">
+            <hbox>
+                <textbox id="user_management_name" maxlength="64" flex="1"/>
+                <button label="Įtraukti" id="user_management_add"/>
+            </hbox>
+            <listbox id="user_management_list" flex="1"/>
+            <hbox>
+                <vbox>
+                    <checkbox id="user_management_admin" checked="false" label="Administratorius"/>
+                    <checkbox id="user_management_business" checked="false" label="Verslo klientas"/>
+                </vbox>
+                <spacer flex="1"/>
+                <vbox>
+                    <button label="Keisti" id="user_management_change"/>
+                    <button label="Trinti" id="user_management_delete"/>
+                </vbox>
+            </hbox>
+        </tabpanel>
+    </tabpanels>
+</tabbox>
+
+</window>

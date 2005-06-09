@@ -1,0 +1,33 @@
+- collect base products in Lithuania
+    - collect contacts to following categories
+    - write letters
+    - add information to database
+- collect information about restorants and etc.
+- collect information about recipes
+
+- user message system
+- move operation
+    - waiting show
+    - synchronisation
+    - drag and drop
+- style, resizeable columns, images
+    - popup menus
+    - shortcut keys
+- normal calendar control
+
+- diets
+- BMI and other info
+- diabetics
+- information which could help to improve many things
+- automatic filling system from resaurants and etc
+- connection-less program
+- offer list what to eat
+
+- take users from other admin
+- add age into account
+- default units for product
+- complex not updated in tree
+
+Problems:
+- remote I18N (yet impossible, DTD bugs, etc.)
+

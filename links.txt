@@ -1,0 +1,5 @@
+http://lxr.mozilla.org/seamonkey/source/extensions/python/xpcom/doc/configure.html
+http://www.mozilla.org/catalog/architecture/xpcom/pyxpcom/
+http://www.mozilla.org/projects/xpcom/book/cxc/html/
+http://books.mozdev.org/html/mozilla-pref.html
+xulplanet.com

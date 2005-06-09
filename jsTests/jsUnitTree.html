@@ -1,0 +1,142 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Auslavis Treeview Tests</title>
+<script language="JavaScript" type="text/javascript" src="../jsunit/app/jsUnitCore.js"></script>
+<script language="JavaScript" type="text/javascript" src="../js/comm.js"></script>
+<script language="JavaScript" type="text/javascript" src="../js/alTreeView.js"></script>
+<script language="JavaScript" type="text/javascript">
+
+function test_getRowCount() {
+    alTreeView.prototype.performActionOnRow = function(aAction, aRow) {};
+    var view =  new alTreeView();
+
+    var data = [{prod_tree_name: '/', open: false, id: '1'}];
+    assertEquals("Initial row count must be equal to 1", 1, view._getRowCount(data));
+
+    var data = [{prod_tree_name: '/', open: false, id: '1', children: [{prod_tree_name: 'test', id: '2'}]}];
+    assertEquals("Then category is closed row count must be equal to 1", 1, view._getRowCount(data));
+
+    var data = [{prod_tree_name: '/', open: true, id: '1', children: [{prod_tree_name: 'test', id: '2'}]}];
+    assertEquals("Then category is opened row count must be equal to 2", 2, view._getRowCount(data));
+}
+
+function test_getRowElement() {
+    alTreeView.prototype.performActionOnRow = function(aAction, aRow) {};
+    var view =  new alTreeView();
+
+    var root = {prod_tree_name: '/', open: true, id: '1'};
+    var data = [root];
+    assertEquals("Get root element", root, view._getRowElement(data, 0));
+
+    var dir = {prod_tree_name: 'test', open: true, id: '?'};
+    var child = {prod_tree_name: 'test', id: '?'};
+    root.children = [dir, dir]
+    assertEquals("Get dir element", dir, view._getRowElement(data, 1));
+
+    dir.children = [child, child, child]
+    assertEquals("Must be dir element", dir, view._getRowElement(data, 1));
+    assertEquals("Must be dir element", dir, view._getRowElement(data, 5));
+    assertEquals("Must be child element", child, view._getRowElement(data, 4));
+    assertEquals("Must be child element", child, view._getRowElement(data, 6));
+
+    root.open = false
+    assertUndefined("Closed root directory", view._getRowElement(data, 1));
+}
+
+function test_getLevel() {
+    alTreeView.prototype.performActionOnRow = function(aAction, aRow) {};
+    var view =  new alTreeView();
+
+    var root = {prod_tree_name: '/', open: true, id: '1'};
+    var data = [root];
+    assertEquals("Get root element level", 0, view._getLevel(data, 0));
+
+    var dir = {prod_tree_name: 'test', open: true, id: '?'};
+    var child = {prod_tree_name: 'test', id: '?'};
+    root.children = [dir, dir]
+    dir.children = [child, child, child]
+    assertEquals("Get dir element level", 1, view._getLevel(data, 5));
+    assertEquals("Get child element level", 2, view._getLevel(data, 4));
+    assertEquals("Get child element level", 2, view._getLevel(data, 6));
+}
+
+function test_getParentIndex() {
+    alTreeView.prototype.performActionOnRow = function(aAction, aRow) {};
+    var view =  new alTreeView();
+
+    var root = {prod_tree_name: '/', open: true, id: '1'};
+    var data = [root];
+    assertEquals("Get parent of root element", -1, view._getParentIndex(data, 0));
+
+    var dir = {prod_tree_name: 'test', open: true, id: '?'};
+    var child = {prod_tree_name: 'test', id: '?'};
+    root.children = [dir, dir]
+    dir.children = [child, child, child]
+    assertEquals("Get parent of dir element", 0, view._getParentIndex(data, 1));
+    assertEquals("Get parent of dir element", 0, view._getParentIndex(data, 5));
+    assertEquals("Get parent of child element", 1, view._getParentIndex(data, 2));
+    assertEquals("Get parent of child element", 1, view._getParentIndex(data, 3));
+    assertEquals("Get parent of child element", 1, view._getParentIndex(data, 4));
+    assertEquals("Get parent of child element", 5, view._getParentIndex(data, 6));
+    assertEquals("Get parent of child element", 5, view._getParentIndex(data, 7));
+    assertEquals("Get parent of child element", 5, view._getParentIndex(data, 8));
+}
+
+function testhasNextSibling() {
+    alTreeView.prototype.performActionOnRow = function(aAction, aRow) {};
+    var view =  new alTreeView();
+
+    var root = {prod_tree_name: '/', open: true, id: '1'};
+    view.data = [root];
+    var dir = {prod_tree_name: 'test', open: true, id: '?'};
+    var child = {prod_tree_name: 'test', id: '?'};
+    root.children = [dir, dir]
+    dir.children = [child, child, child];
+
+    assertTrue("First directory has next sibling after 1st", view.hasNextSibling(1, 1));
+    assertTrue("First directory has next sibling after 2nd", view.hasNextSibling(1, 2));
+    assertTrue("First directory has next sibling after 3rd", view.hasNextSibling(1, 3));
+    assertTrue("First directory has next sibling after 4th", view.hasNextSibling(1, 4));
+
+    assertFalse("Second directory has not next sibling after 5th", view.hasNextSibling(5, 5));
+    assertFalse("Second directory has not next sibling after 6th", view.hasNextSibling(5, 6));
+    assertFalse("Second directory has not next sibling after 7th", view.hasNextSibling(5, 7));
+}
+
+function test_removeRow() {
+    alTreeView.prototype._retrieveRows = function(aRow) {};
+    var view =  new alTreeView();
+
+    var root = {prod_tree_name: '/', open: true, id: '1'};
+    view.data = [root];
+    var dir1 = {prod_tree_name: 'test', open: true, id: '?'};
+    var dir2 = {prod_tree_name: 'test', open: true, id: '?'};
+    var child = {prod_tree_name: 'test', id: '?'};
+    root.children = [dir1, dir2]
+    dir1.children = [child, child, child];
+    dir2.children = [child, child, child];
+
+    assertEquals("Initially there are 9 rows", 9, view._getRowCount(view.data));
+
+    view.boxObject = {};
+    view.boxObject.rowCountChanged = function(row, count) {};
+    view._removeRow(3);
+    assertEquals("Remove leaf row", 8, view._getRowCount(view.data));
+    view._removeRow(1);
+    assertEquals("Remove node row", 5, view._getRowCount(view.data));
+}
+
+</script>
+    </head>
+
+    <body>
+        <h1>TreeTests</h1>
+
+        <p>This page tests Auslavis treeview</p>
+    </body>
+</html>
+
+
