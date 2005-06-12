@@ -4,3 +4,6 @@ http://www.mozilla.org/projects/xpcom/book/cxc/html/
 http://books.mozdev.org/html/mozilla-pref.html
 xulplanet.com
 http://mb.eschew.org/
+
+Russian text about dynamic trees:
+http://xpoint.ru/know-how/Articles/DinamicheskieDerev'yaNaXUL?4
