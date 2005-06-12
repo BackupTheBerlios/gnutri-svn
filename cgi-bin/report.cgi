@@ -123,7 +123,7 @@ else:
         password = form['password'].value
 
     import MySQLdb
-    db=MySQLdb.connect(host='db.berlios.de', db='gnutri', user='gnutri', passwd='')
+    db=MySQLdb.connect(host='localhost', db='Auslavis', user='', passwd='')
     c=db.cursor()
     from au_user import getUserId
     user_id = getUserId(c, form['user'].value, password)

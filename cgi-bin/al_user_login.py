@@ -5,7 +5,7 @@ def run(args, dbparams):
     password = args['password']
 
     import MySQLdb
-    db=MySQLdb.connect(host=dbparams["host"], db=dbparams["db"], user=dbparams["db"], passwd=dbparams["passwd"])
+    db=MySQLdb.connect(host=dbparams["host"], db=dbparams["db"], user=dbparams["user"], passwd=dbparams["passwd"])
     c=db.cursor()
 
     c.execute("SELECT id, admin, business FROM users WHERE name=%s and password=%s", (name, password))

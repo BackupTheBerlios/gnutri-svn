@@ -4,7 +4,7 @@ def run(args, dbparams):
 
     import MySQLdb
     from au_user import getUserId, isUserParent
-    db=MySQLdb.connect(host=dbparams["host"], db=dbparams["db"], user=dbparams["db"], passwd=dbparams["passwd"])
+    db=MySQLdb.connect(host=dbparams["host"], db=dbparams["db"], user=dbparams["user"], passwd=dbparams["passwd"])
     db.autocommit(False)
     c=db.cursor()
 

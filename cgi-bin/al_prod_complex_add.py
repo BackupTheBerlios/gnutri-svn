@@ -22,7 +22,7 @@ def noCircularDep(c, id, prid):
 def run(args, dbparams):
     from au_user import getUserId, haveProductRight
     import MySQLdb
-    db=MySQLdb.connect(host=dbparams["host"], db=dbparams["db"], user=dbparams["db"], passwd=dbparams["passwd"])
+    db=MySQLdb.connect(host=dbparams["host"], db=dbparams["db"], user=dbparams["user"], passwd=dbparams["passwd"])
     db.autocommit(False)
     c=db.cursor()
 

@@ -7,7 +7,7 @@ def run(args, dbparams):
     from au_user import getUserId, haveRight, haveProductRight, isUserParent, booltostr, \
             getCategoryParent, getProductParent, isCategoryOwner, isProductOwner
 
-    db=MySQLdb.connect(host=dbparams["host"], db=dbparams["db"], user=dbparams["db"], passwd=dbparams["passwd"])
+    db=MySQLdb.connect(host=dbparams["host"], db=dbparams["db"], user=dbparams["user"], passwd=dbparams["passwd"])
     c=db.cursor()
 
     user = getUserId(c, args['name'], args['password'])

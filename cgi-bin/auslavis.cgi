@@ -13,7 +13,7 @@ if os.environ['REQUEST_METHOD'] == 'POST':
     from RetrData import retrdata
     args = retrdata(xml)
 
-    db = {'host': 'db.berlios.de', 'db': 'gnutri', 'user': 'gnutri', 'passwd': ''}
+    dbparams = {'host': '', 'db': 'Auslavis', 'user': 'dalius', 'passwd': ''}
     command = args['command']
     result = __import__('al_%s' % command).run(args, dbparams)
 

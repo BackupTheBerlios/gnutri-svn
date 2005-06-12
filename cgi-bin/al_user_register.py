@@ -12,7 +12,7 @@ def run(args, dbparams):
     args['name'] = args['name'].lower()
 
     import MySQLdb
-    db=MySQLdb.connect(host=dbparams["host"], db=dbparams["db"], user=dbparams["db"], passwd=dbparams["passwd"])
+    db=MySQLdb.connect(host=dbparams["host"], db=dbparams["db"], user=dbparams["user"], passwd=dbparams["passwd"])
     db.autocommit(False)
     c=db.cursor()
 

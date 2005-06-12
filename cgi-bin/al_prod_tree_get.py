@@ -1,7 +1,7 @@
 def run(args, dbparams):
     parent = int(args['parent'])
     import MySQLdb
-    db=MySQLdb.connect(host=dbparams["host"], db=dbparams["db"], user=dbparams["db"], passwd=dbparams["passwd"])
+    db=MySQLdb.connect(host=dbparams["host"], db=dbparams["db"], user=dbparams["user"], passwd=dbparams["passwd"])
     c=db.cursor()
 
     from au_user import getUserId, haveRight, haveProductRight

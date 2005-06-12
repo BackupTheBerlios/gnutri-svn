@@ -4,7 +4,7 @@ def run(args, dbparams):
     id = int(args['id'])
 
     import MySQLdb
-    db=MySQLdb.connect(host=dbparams["host"], db=dbparams["db"], user=dbparams["db"], passwd=dbparams["passwd"])
+    db=MySQLdb.connect(host=dbparams["host"], db=dbparams["db"], user=dbparams["user"], passwd=dbparams["passwd"])
     c=db.cursor()
 
     c.execute("SELECT p.id, p.name, un.name, c.amount, u.weight "
