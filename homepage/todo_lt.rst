@@ -5,6 +5,9 @@ Kaip galėtų keistis sistema:
 
 * Sistemą galima pritaikyti diabetikams: jiems pvz. reikia tiksliai
   apskaičiuoti insulino kiekį
+* sportuojantis žmogus, priklausomai nuo sporto rūšies, turi gauti skirtingos
+  vertės maistą, todėl būtų gerai, kad automatiškai siūloma baltymų,
+  angliavandenių ir riebalų santykį būtų galima koreguoti.
 * Manau, kad žmonės laikosi įvairių dietų. Pvz.: vegetarams nerodyti
   mėsinių produktų
 * Produktus taip pat sudaro vitaminai ir daug kitų medžiagų: tai irgi
