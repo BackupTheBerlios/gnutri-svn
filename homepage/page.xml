@@ -8,10 +8,12 @@
     <link rel=stylesheet type="text/css" href="%(css)s"/>
     <link rel="alternate" title="rss" href="index.rss"
         type="application/rss+xml"/>
+    <link rel="alternate" title="all rss" href="all.rss"
+        type="application/rss+xml"/>
     <link rel="shortcut icon" href="%(icon)s" type="image/x-icon" />
 </head>
 <body>
-    <h1><a href="index.html">%(blogpath)s</a></h1>
+    <h1>%(blogpath)s</h1>
     <div class="date">%(date)s</div>
     %(body)s
     <div>%(banners)s</div>
