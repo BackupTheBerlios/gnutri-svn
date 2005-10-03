@@ -22,3 +22,5 @@ lietuviui nemokamą ir prieinamą. Galbūt kas nors turi komercinių
 pasiūlymų. Manau, toks projektas galetų gyventi iš reklamos - kuri
 organizacija nenoretų prie savo produkto pridėti pvz.:
 "Mums rūpi jūsų sveikata".
+
+Taigi laukiu jūsų pasiūlymų, prašymų ir `pagalbos <devel/index.html>`__.
