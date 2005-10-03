@@ -40,6 +40,11 @@ h2 {
     padding: 1ex
 }
 
+.date {
+    border: 1px solid black;
+    background-color: #AAA;
+}
+
 div.document {
     background:#fff;
     margin:5px; 
