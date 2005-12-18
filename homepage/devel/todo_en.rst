@@ -36,3 +36,4 @@ List of things that should be or planned to be done in the future:
 - default units for product
 - complex not updated in tree
 - remote I18N (now impossible, DTD bugs, etc.)
+- The Game
