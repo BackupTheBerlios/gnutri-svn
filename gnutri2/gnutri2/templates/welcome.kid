@@ -9,9 +9,9 @@
 
 <body>
     <p>Your TurboGears server is running as of <span py:replace="now">now</span>.</p>
-    
+
     <h2>Quick! Dive right in!</h2>
-    
+
     <p>Here's what you'll likely want to do:</p>
 
     <ol>
@@ -24,10 +24,10 @@
         <li>Repeat steps 4-6 until done.</li>
         <li><b>Profit!</b></li>
     </ol>
-    
+
     <p>If you haven't already, you might check out some of the <a href="http://www.turbogears.org/docs/" target="_blank">documentation</a>.</p>
-    
+
     <p>Thanks for using TurboGears! See you on the <a href="http://groups.google.com/group/turbogears" target="_blank">mailing list</a> and the "turbogears" channel on irc.freenode.org!</p>
-    
+
 </body>
 </html>

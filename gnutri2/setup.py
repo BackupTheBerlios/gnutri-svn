@@ -8,7 +8,7 @@ setup(
     #author="",
     #author_email="",
     #url="",
-    install_requires = ["TurboGears >= 0.8a4"],
+    install_requires = ["TurboGears >= 0.8.9"],
     scripts = ["gnutri2-start.py"],
     zip_safe=False,
     packages=find_packages(),
