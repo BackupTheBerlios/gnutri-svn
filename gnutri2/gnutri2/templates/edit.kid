@@ -38,7 +38,11 @@
         }
 
         function newProduct(){
-        
+            var url = "${std.url('/')}" +
+                "edit/newproduct?tg_format=json&amp;product=";
+            url += getElement('newproduct').value;
+            var d = loadJSONDoc(url);
+            d.addCallback(showProducts);
         }
 
         function onKey(e, func){
@@ -63,15 +67,16 @@
     </div>
     <div class="products" id="products">
         <TABLE>
-            <TR>
-                <TD>
-                    <input type="text" name="newproduct" id="newproduct"
-                    onkeyup="onKey(event, newProduct)"/>
-                </TD>
-                <TD>
-                    <input type="button" value="+" onclick="newProduct()"/>
-                </TD>
-            </TR>
+            <form action="/edit/newproduct" method="post">
+                <TR>
+                    <TD>
+                        <input type="text" name="product"/>
+                    </TD>
+                    <TD>
+                        <input type="submit" value="+"/>
+                    </TD>
+                </TR>
+            </form>
         </TABLE>
     </div>
     <div class="name">
