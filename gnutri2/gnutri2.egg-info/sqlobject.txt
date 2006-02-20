@@ -1,2 +1,0 @@
-db_module=gnutri2.model
-history_dir=$base/gnutri2/sqlobject-history
